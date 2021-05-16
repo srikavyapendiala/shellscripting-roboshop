@@ -1,7 +1,11 @@
 #!/bin/bash
+source components/common.sh
+OS_PREREQ
+
 Head"Download Docker File"
 curl -s https://get.docker.com | bash
 Stat $?
+
 Head"Enable and start Docker"
 systemctl enable docker && systemctl start docker
 Stat $?
