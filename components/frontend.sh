@@ -5,17 +5,17 @@ source components/common.sh
 OS_PREREQ
  Head "Install Nginx"
  apt install nginx -y &>>$LOG
- STAT $?
+ Stat $?
 
  Head "Start Nginx Service"
  systemctl start nginx
- STAT $?
+ Stat $?
 
  DOWNLOAD_COMPONENT
 
  Head "Remove Default Configuration"
  rm -rf /var/www/html /etc/nginx/sites_enabled/default /etc/nginx/sites-available/default
- STAT $?
+ Stat $?
 
  Head "Unzip Downloaded archieve"
  cd /var/www
@@ -23,13 +23,13 @@ OS_PREREQ
  && mv frontend-main/* .
  && mv static html
  && rm -rf frontend-main README.md
- STAT $?
+ Stat $?
 
  Head "Update Nginx Configuration"
  mv roboshop.conf /etc/nginx/sites-enabled//roboshop.conf
- STAT $?
+ Stat $?
 
  Head "Start Nginx Service"
  systemctl restart nginx
- STAT $?
+ Stat $?
 
