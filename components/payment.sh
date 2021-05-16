@@ -1,12 +1,18 @@
 #!/bin/bash
 
-Create a user for running the application
-# useradd -m -s /bin/bash roboshop
-Download the repo.
+Head "Create a user for running the application"
+useradd -m -s /bin/bash roboshop
+Stat $?
+
+Head "Switch to Directory"
 $ cd /home/roboshop
-$ curl -L -s -o /tmp/payment.zip "https://github.com/zelar-soft-roboshop/payment/archive/main.zip"
+Stat $?
+
+DOWNLOAD_COMPONENT
+
 $ unzip /tmp/payment.zip
 $ mv payment-main payment
+
 Install Python Dependency Installer
 # apt update
 # apt install python3-pip -y
