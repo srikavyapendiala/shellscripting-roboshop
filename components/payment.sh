@@ -10,22 +10,26 @@ Stat $?
 
 DOWNLOAD_COMPONENT
 
-$ unzip /tmp/payment.zip
+Head "Unzip and move"
+$ unzip /tmp/payment.zip &>>$LOG
 $ mv payment-main payment
 
-Install Python Dependency Installer
-# apt update
-# apt install python3-pip -y
-Install the dependencies
-# cd /home/roboshop/payment
-# pip3 install -r requirements.txt
-Note: Above command may fail with permission denied, So run as root user
+source components/common.sh
+OS_PREREQ
 
-Update the roboshop user and group id in payment.ini file.
+Head "Install Python Dependency Installer"
+apt install python3-pip -y &>>$LOG
+Stat $?
 
-Setup the service
+Head "Install the dependencies"
+cd /home/roboshop/payment
+pip3 install -r requirements.txt &>>$LOG
 
-# mv /home/roboshop/payment/systemd.service /etc/systemd/system/payment.service
-# systemctl daemon-reload
-# systemctl enable payment
-# systemctl start payment
+Head "Change the Ip address In service files"
+mv /home/roboshop/payment/systemd.service /etc/systemd/system/payment.service
+Stat $?
+
+Head "Setup the service"
+systemctl daemon-reload
+&& systemctl enable payment && systemctl start payment
+Stat $?
