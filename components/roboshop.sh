@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export LOG=tmp/${COMPONENT}.log
-rf -f $LOG
+rf -rf $LOG
 
 COMPONENT =$1
 
