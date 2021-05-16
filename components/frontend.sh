@@ -23,6 +23,9 @@ OS_PREREQ
 
  Head "Update Nginx Configuration"
  mv roboshop.conf /etc/nginx/sites-enabled//roboshop.conf
+ for comp in catalouge cart user shipping payment ; do
+   sed -i -e "/$comp/ s/localhost/${comp}.kavya.website/" /etc/nginx/sites-enabled/roboshop.conf
+ done
  Stat $?
 
  Head "Start Nginx Service"
