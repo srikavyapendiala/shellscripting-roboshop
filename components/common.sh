@@ -25,6 +25,7 @@ ERROR() {
 
 DOWNLOAD_COMPONENT() {
   Head "Downloading ${COMPONENT} component"
-  curl -s -L -o /tmp/${COMPONENT}.zip/ https://github.com/srikavyapendiala/shellscripting-roboshop/${COMPONENT}/.git
+  curl -s -L -o /tmp/${COMPONENT}.zip/ https://github.com/srikavyapendiala/shellscripting-roboshop/${COMPONENT}
+  /archieve/main.zip
 }
 
