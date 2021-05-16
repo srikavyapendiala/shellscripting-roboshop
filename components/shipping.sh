@@ -11,19 +11,22 @@ Head "Create a user"
 useradd -m -s /bin/bash roboshop
 Stat $?
 
-Head "Download the repo"
+Head "switch to directory"
 $ cd /home/roboshop
-Head "Download the repo"
-$ curl -s -L -o /tmp/shipping.zip "https://github.com/zelar-soft-roboshop/shipping/archive/main.zip"
+
+DOWNLOAD_COMPONENT
+Head "Unzip all files"
 $ unzip /tmp/shipping.zip
 $ mv shipping-main shipping
 $ cd shipping
 $ mvn clean package
 $ mv target/shipping-1.0.jar shipping.jar
-Copy the service file and start the service.
-# mv /home/roboshop/shipping/systemd.service /etc/systemd/system/shipping.service
+Stat $?
 
-# systemctl daemon-reload
-# systemctl start shipping
-# systemctl enable shipping
+Head "Copy the service file"
+mv /home/roboshop/shipping/systemd.service /etc/systemd/system/shipping.service
+
+Head"start the service"
+systemctl daemon-reload
+&& systemctl start shipping && systemctl enable shipping
 
