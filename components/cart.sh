@@ -22,7 +22,7 @@ chown roboshop:roboshop /home/roboshop -R
 Stat $?
 
 Head "Update Endpoints in Service file"
-sed -i -e "s/MONGO_DNSNAME/mongodb.kavya.website/" /home/roboshop/cart/systemd.service
+sed -i -e "s/REDIS_ENDPOINT/redis.kavya.website/" -e "s/CATALOUGE_ENDPOINT/catalouge.kavya.website/" /home/roboshop/cart/systemd.service
 Stat $?
 
 Head"Setup systemd Service"
