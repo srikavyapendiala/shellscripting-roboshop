@@ -28,4 +28,6 @@ if [ $? -ne 0]; then
 else
   rabbitmqctl set_user_tags roboshop administrator &>>$LOG && rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
   &>>$LOG
+fi
+Stat $?
 
