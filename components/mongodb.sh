@@ -18,9 +18,11 @@ Config file: /etc/mongod.conf
 Stat $?
 
 Head "restart the service"
-systemctl restart mongod
+systemctl restart mongod && systemctl enable mongod
 Stat $?
 
 DOWNLOAD_COMPONENT
 
+Head ""
 cd /tmp && unzip mongodb.zip &&cd mongodb-main &&mongo < catalogue.js &&mongo < users.js
+Stat $?
