@@ -1,28 +1,35 @@
 #!/bin/bash
+
 source components/common.sh
 OS_PREREQ
 
-Head "Install Nodejs "
-apt install npm -y
+Head "Install npm"
+apt install npm -y &>>$LOG
 Stat $?
 
-Head "use roboshop as the username"
-useradd -m -s /bin/bash roboshop
-Stat $?
+Head "Adding roboshop User"
+id roboshop &>>$LOG
+if [$? -nq 0]; then
+   useradd -m -s /bin/bash roboshop
+   Stat $?
+fi
 
 DOWNLOAD_COMPONENT
 
-Head"switch to the roboshop user"
-$ cd /home/roboshop
-$ unzip /tmp/cart.zip
-$ mv cart-main cart
-$ cd /home/roboshop/cart
-$ npm install
+Head"Extracting Downloaded Archieve"
+cd /home/roboshop && unzip /tmp/cart.zip  &>>$LOG && mv cart-main cart && cd /home/roboshop/cart && npm install &>>$LOG &&
+chown roboshop:roboshop /home/roboshop -R
 Stat $?
 
-Head "update the IP address of MONGODB Server in systemd.service file"
+Head "Update Endpoints in Service file"
+sed -i -e "s/MONGO_DNSNAME/mongodb.kavya.website/" /home/roboshop/cart/systemd.service
+Stat $?
+
+Head"Setup systemd Service"
 mv /home/roboshop/cart/systemd.service /etc/systemd/system/cart.service
 
-Head"set up the service with systemctl"
-systemctl daemon-reload && systemctl start cart
-&& systemctl enable cart
+Head " Restart the service"
+systemctl daemon-reload
+&& systemctl start cart && systemctl enable cart
+Stat $?
+
