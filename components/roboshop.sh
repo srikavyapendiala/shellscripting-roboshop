@@ -1,15 +1,19 @@
 #!/bin/bash
 
+export LOG=tmp/${COMPONENT}.log
+rf -f $LOG
+
 COMPONENT =$1
-if [ | -f components/${COMPONENT}.sh ]; then
-   ERROR "Invalid file"
+
+if [! -f components/${COMPONENT}.sh ]; then
+   echo -e "\e[31m "Invalid file\e[0m"
    exit 1
 fi
 
-USER_NAME=$(whoami)
+USER_NAME=$(Whoami)
 
 if [ "${USER_NAME}" != "root" ]; then
-    ERROR "you should be a root user to try this script, Try with sudo"
+    error "you should be a root user to try this script, Try with sudo"
     exit 1
 fi
 
