@@ -15,6 +15,7 @@ Head "switch to directory"
 $ cd /home/roboshop
 
 DOWNLOAD_COMPONENT
+
 Head "Unzip all files"
 $ unzip /tmp/shipping.zip
 $ mv shipping-main shipping

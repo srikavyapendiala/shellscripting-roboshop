@@ -1,26 +1,28 @@
 #!/bin/bash
-apt update
-# apt install npm -y
-Let's now set up the User application.
+source components/common.sh
+OS_PREREQ
 
-As part of operating system standards, we run all the applications and databases as a normal user but not with root user.
+Head "Install Nginx"
+apt install npm -y &>>$LOG
 
-So to run the User service we choose to run as a normal user and that user name should be more relevant to the project. Hence we will use roboshop as the username to run the service.
+Head "use roboshop as the username to run the service"
+useradd -m -s /bin/bash roboshop
+Stat $?
 
-#  useradd -m -s /bin/bash roboshop
-So let's switch to the roboshop user and run the following commands.
+DOWNLOAD_COMPONENT
 
-$ curl -s -L -o /tmp/user.zip "https://github.com/zelar-soft-roboshop/user/archive/main.zip"
+Head "switch to the roboshop user and run the following commands"
 $ cd /home/roboshop
 $ unzip /tmp/user.zip
 $ mv user-main user
 $ cd /home/roboshop/user
 $ npm install
-NOTE: We need to update the IP address of MONGODB Server in systemd.service file
-Now, lets set up the service with systemctl.
+Stat $?
 
-# mv /home/roboshop/user/systemd.service /etc/systemd/system/user.service
-# systemctl daemon-reload
-# systemctl start user
-# systemctl enable user
+Head "update the IP address of MONGODB Server in systemd.service file"
+mv /home/roboshop/user/systemd.service /etc/systemd/system/user.service
+
+Head "set up the service with systemctl"
+systemctl daemon-reload && systemctl start user
+&& systemctl enable user
 
