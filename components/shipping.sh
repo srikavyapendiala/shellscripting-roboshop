@@ -29,4 +29,3 @@ mv /home/roboshop/shipping/systemd.service /etc/systemd/system/shipping.service
 Head"start the service"
 systemctl daemon-reload
 && systemctl start shipping && systemctl enable shipping
-
